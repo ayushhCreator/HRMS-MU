@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>List of Student Marks</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover, .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<header>
+  Welcome to Magadh University
+</header>
+<main>
+  <h1>Student Marks</h1>
+  <div th:if="${message}" class="alert alert-success" role="alert">
+    <span th:text="${message}"></span>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Student Name</th>
+      <th>Subject ID</th>
+      <th>Semester</th>
+      <th>Internal 1</th>
+      <th>Internal 2</th>
+      <th>Internal 3</th>
+      <th>Best Internal Marks</th>
+      <th>Final Exam Marks</th>
+      <th>Total Marks</th>
+      <th>Percentage</th>
+      <th>Division</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="studentMarks : ${studentMarksList}">
+      <td th:text="${studentMarks.markId}"></td>
+      <td th:text="${studentMarks.student?.name}"></td>
+      <td th:text="${studentMarks.subjectId}"></td>
+      <td th:text="${studentMarks.semester}"></td>
+      <td th:text="${studentMarks.internal1}"></td>
+      <td th:text="${studentMarks.internal2}"></td>
+      <td th:text="${studentMarks.internal3}"></td>
+      <td th:text="${studentMarks.bestInternalMarks}"></td>
+      <td th:text="${studentMarks.finalExamMarks}"></td>
+      <td th:text="${studentMarks.totalMarks}"></td>
+      <td th:text="${studentMarks.percentage}"></td>
+      <td th:text="${studentMarks.division}" th:classappend="'division-' + ${studentMarks.division}"></td>
+
+
+      <td class="action-buttons">
+        <a th:href="@{/student-marks/update/{markId}(markId=${studentMarks.markId})}" class="btn btn-warning btn-sm btn-update">Update</a>
+        <form th:action="@{/student-marks/delete/{markId}(markId=${studentMarks.markId})}" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm btn-delete">Delete</button>
+        </form>
+        <button class="btn btn-info btn-sm"
+                th:onclick="'showPerformanceGraph(' + ${studentMarks.studentId} + ')'">View Performance</button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal to show the graph -->
+  <div id="performanceModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Student Performance</h3>
+      <canvas id="performanceChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+
+  <script type="text/javascript" th:inline="javascript">
+    function showPerformanceGraph(studentId) {
+      // Make AJAX call to fetch the student performance data
+      fetch('/student-marks/performance/' + studentId)
+        .then(response => response.json())
+        .then(data => {
+          // Prepare data for the chart
+          var labels = [];
+          var internalMarks = [];
+          var finalExamMarks = [];
+          var totalMarks = [];
+
+          data.forEach(function(studentMarks) {
+            labels.push(studentMarks.student.name);
+            internalMarks.push(studentMarks.internal1);
+            finalExamMarks.push(studentMarks.finalExamMarks);
+            totalMarks.push(studentMarks.totalMarks);
+          });
+
+          // Generate the chart
+          var ctx = document.getElementById('performanceChart').getContext('2d');
+          var performanceChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Internal Marks',
+                  data: internalMarks,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+                },
+                {
+                  label: 'Final Exam Marks',
+                  data: finalExamMarks,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1
+                },
+                {
+                  label: 'Total Marks',
+                  data: totalMarks,
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+
+          // Open the modal to show the graph
+          document.getElementById("performanceModal").style.display = "block";
+        })
+        .catch(error => console.error('Error fetching performance data:', error));
+    }
+
+    // Close the modal when the user clicks the close button
+    document.querySelector(".close").addEventListener("click", function() {
+      document.getElementById("performanceModal").style.display = "none";
+    });
+
+    // Close the modal if the user clicks anywhere outside of the modal
+    window.onclick = function(event) {
+      var modal = document.getElementById("performanceModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</main>
+</body>
+</html>
+
+
+
