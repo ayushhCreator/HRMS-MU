@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>View Timetable</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f9f9f9;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        margin: 20px 0;
+    }
+
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    @media (max-width: 768px) {
+        table {
+            width: 100%;
+        }
+
+        th, td {
+            font-size: 12px;
+            padding: 8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        table {
+            border: 0;
+        }
+
+        table caption {
+            font-size: 1.3em;
+        }
+
+        thead {
+            display: none;
+        }
+
+        tr {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        td {
+            display: block;
+            text-align: right;
+            font-size: 12px;
+            padding: 8px;
+            position: relative;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 50%;
+            padding-left: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+    }
+  </style>
+</head>
+<body>
+<h1>View Timetable</h1>
+
+<!-- Department filter (if needed) -->
+<form th:action="@{/timetable/viewby}" method="get">
+  <label for="department">Department:</label>
+  <input type="text" id="department" name="department" required />
+
+  <label for="program">Program:</label>
+  <input type="text" id="program" name="program" required />
+
+  <label for="semester">Semester:</label>
+  <input type="text" id="semester" name="semester" required />
+
+  <label for="academicYear">Academic Year:</label>
+  <input type="text" id="academicYear" name="academicYear" required />
+
+  <button type="submit">View Timetable</button>
+</form>
+
+<!-- Display timetable -->
+<table>
+  <thead>
+  <tr>
+    <th>Department</th>
+    <th>Program</th>
+    <th>Semester</th>
+    <th>Academic Year</th>
+    <th>Day</th>
+    <th>Time Slot</th>
+    <th>Subject</th>
+    <th>Faculty</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="timetable : ${timetables}">
+    <td th:text="${timetable.department}" data-label="Department"></td>
+    <td th:text="${timetable.program}" data-label="Program"></td>
+    <td th:text="${timetable.semester}" data-label="Semester"></td>
+    <td th:text="${timetable.academicYear}" data-label="Academic Year"></td>
+    <td th:text="${timetable.day}" data-label="Day"></td>
+    <td th:text="${timetable.timeSlot}" data-label="Time Slot"></td>
+    <td th:text="${timetable.subject}" data-label="Subject"></td>
+    <td th:text="${timetable.faculty}" data-label="Faculty"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

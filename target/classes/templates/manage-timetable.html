@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Manage Timetable</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+    .btn-primary {
+        background-color: #4CAF50;
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h2>Manage Timetable</h2>
+</div>
+
+<div class="container mt-4">
+  <!-- Department Selection -->
+  <form method="get" action="/timetable/manage" class="mb-4">
+    <label for="department">Select Department:</label>
+    <select name="department" id="department" class="form-control w-50 d-inline" required>
+      <option th:each="dept : ${departments}" th:value="${dept}" th:text="${dept}"></option>
+    </select>
+    <button type="submit" class="btn btn-primary">Load Timetable</button>
+  </form>
+
+  <!-- Add Timetable Entry -->
+  <h4>Add Timetable Entry</h4>
+  <form th:action="@{/timetable/add}" method="post" class="mb-4">
+    <input type="hidden" name="department" th:value="${selectedDepartment}" />
+    <div class="row">
+      <div class="col-md-2">
+        <label for="day">Day:</label>
+        <select name="day" id="day" class="form-control" required>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" class="form-control" required />
+      </div>
+      <div class="col-md-2">
+        <label for="classroomNumber">Classroom:</label>
+        <input type="text" id="classroomNumber" name="classroomNumber" class="form-control" required />
+      </div>
+      <div class="col-md-2">
+        <label for="type">Type:</label>
+        <select id="type" name="type" class="form-control" required>
+          <option value="Class">Class</option>
+          <option value="Lab">Lab</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="startTime">Start Time:</label>
+        <input type="time" id="startTime" name="startTime" class="form-control" required />
+      </div>
+      <div class="col-md-2">
+        <label for="endTime">End Time:</label>
+        <input type="time" id="endTime" name="endTime" class="form-control" required />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Add Timetable</button>
+  </form>
+
+  <!-- Display Timetable -->
+  <h4>All Timetables for <span th:text="${selectedDepartment}"></span></h4>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Day</th>
+      <th>Subject</th>
+      <th>Classroom</th>
+      <th>Type</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="timetable : ${timetables}">
+      <td th:text="${timetable.day}"></td>
+      <td th:text="${timetable.subject}"></td>
+      <td th:text="${timetable.classroomNumber}"></td>
+      <td th:text="${timetable.type}"></td>
+      <td th:text="${timetable.startTime}"></td>
+      <td th:text="${timetable.endTime}"></td>
+      <td>
+        <a th:href="@{/timetable/update/{id}(id=${timetable.id})}" class="btn btn-warning btn-sm">Edit</a>
+        <a th:href="@{/timetable/delete/{id}(id=${timetable.id}, department=${timetable.department})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

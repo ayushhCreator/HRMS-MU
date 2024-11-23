@@ -203,7 +203,13 @@ public class SecurityConfig {
                         .requestMatchers("/student-marks/**").hasAnyRole("ADMIN", "EMPLOYEE")
                         .requestMatchers("/subjects/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT") // Access for students
-                        .requestMatchers("/timetable/**", "/stupassreset/**", "/examination/**").hasRole("STUDENT") // Student-specific page
+                        .requestMatchers("/public/**").permitAll() // Allow public access to certain paths
+                        // Timetable management routes - accessible by EMPLOYEE and ADMIN roles
+                        .requestMatchers("/timetable/create", "/timetable/view", "/timetable/viewby","/timetable/viewby/**",
+                                "/timetable/edit/**", "/timetable/update", "/timetable/delete/**","/timetable/programs/**")
+                        .hasAnyRole("EMPLOYEE", "ADMIN")
+                        // Student view for timetables - accessible by STUDENT role
+                        .requestMatchers("/timetable/student/**").hasRole("STUDENT")
                         .requestMatchers("/mark_attendance").authenticated()
                         .anyRequest().authenticated()
                 )
