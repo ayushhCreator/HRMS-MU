@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pending Projects</title>
+</head>
+<body>
+<h1>Pending Projects</h1>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Department</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="project : ${projects}">
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.department}"></td>
+        <td>
+            <form action="/projects/approve" method="post" th:action="@{'/projects/approve/' + ${project.id}}">
+<!--                <input type="hidden" name="employeeId" value="123"> &lt;!&ndash; Replace with actual employee ID &ndash;&gt;-->
+                <button type="submit">Approve</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

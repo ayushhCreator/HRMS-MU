@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Approved Projects</title>
+</head>
+<body>
+<h1>Approved Projects</h1>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Department</th>
+        <th>Approved By</th>
+    </tr>
+    <tr th:each="project : ${projects}">
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.department}"></td>
+        <td th:text="${project.approvedBy}"></td>
+    </tr>
+</table>
+</body>
+</html>

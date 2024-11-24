@@ -1,6 +1,7 @@
 package com.magadhUniversity.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "projects")
@@ -10,67 +11,39 @@ public class Project {
     private Long id;
 
     @Column(nullable = false)
-    private Long studentId;
-
-    @Column(nullable = false)
     private String department;
 
     @Column(nullable = false)
-    private String program;
+    private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @Column(nullable = false)
-    private String projectTitle;
+    private String status = "Pending"; // Default to "Pending"
 
-    @Column(nullable = false)
-    private Boolean isApproved = false;
+    private Long approvedBy; // Employee ID
 
-    public Long getId() {
-        return id;
-    }
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getStudentId() {
-        return studentId;
-    }
+    public String getDepartment() { return department; }
+    public void setDepartment(String department) { this.department = department; }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getDepartment() {
-        return department;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public String getProgram() {
-        return program;
-    }
+    public Long getApprovedBy() { return approvedBy; }
+    public void setApprovedBy(Long approvedBy) { this.approvedBy = approvedBy; }
 
-    public void setProgram(String program) {
-        this.program = program;
-    }
-
-    public String getProjectTitle() {
-        return projectTitle;
-    }
-
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
-    }
-
-    public Boolean getApproved() {
-        return isApproved;
-    }
-
-    public void setApproved(Boolean approved) {
-        isApproved = approved;
-    }
-
-    // Getters and setters
+    public LocalDateTime getCreatedAt() { return createdAt; }
 }

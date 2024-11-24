@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Project</title>
+</head>
+<body>
+<h1>Add a New Project</h1>
+<form action="/projects/add" method="post">
+    <label for="department">Department:</label>
+    <input type="text" id="department" name="department" required><br><br>
+
+    <label for="title">Project Title:</label>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required></textarea><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
