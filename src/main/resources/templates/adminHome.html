@@ -51,9 +51,14 @@
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
+
+
 <!--</main>-->
 <!--</body>-->
 <!--</html>-->
+
+
+
 
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
@@ -63,8 +68,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-<!--    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">-->
-<!--    <meta name="generator" content="Hugo 0.118.2">-->
+
     <title>Admin Dashboard</title>
     <!-- Script para el tema oscuro -->
     <script src="/js/color-modes.js"></script>
@@ -119,7 +123,10 @@
             display: none;
           }
         }
+
+
     </style>
+
 
 
 
@@ -131,17 +138,9 @@
 <!--  Sidebar Menu-->
 
 <aside class="collapse show collapse-horizontal col-sm-2 p-3 border-end bg-body-tertiary" id="collapseWidthExample">
-    <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-     <svg class="bi pe-none me-2" width="40" height="32">
-       <use xlink:href="#bootstrap" />
-     </svg>
-     <span class="d-print-block">HRMS</span>
-   </a> -->
     <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none">
         <img src="/images/hrmlogo2.png" alt=""  height="40" class="">
-
     </a>
-
     <hr>
     <ul class="list-unstyled ps-0">
 
@@ -180,23 +179,20 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="/employees/attendance/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Employee Attendance</a></li>
                     <li><a href="/employees/attendance/manage" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Manage Employee Attendance</a></li>
-<!--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>-->
-<!--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>-->
+
                 </ul>
             </div>
         </li>
-        <!-- <li class="border-top my-3"></li> -->
+
         <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                     data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                Account
+                Manage TimeTable
             </button>
             <div class="collapse" id="account-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                    <li><a href="/employee/select-department" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add TimeTable</a></li>
+
                 </ul>
             </div>
         </li>
@@ -206,177 +202,144 @@
 
 
 
-    <main class="col-sm-10 bg-body-tertiary" id="main">
+<main class="col-sm-10 bg-body-tertiary" id="main">
     <div class="row" >
 
-    <div class=" col-12 ps-4 pe-4 ">
-        <div class="row">
-            <header>
-                <!-- NavBar -->
-                <nav class="navbar sticky-top navbar-expand-lg border-bottom bg-body-tertiary">
+        <div class=" col-12 ps-4 pe-4 ">
+            <div class="row">
+                <header>
+                    <!-- NavBar -->
+                    <nav class="navbar sticky-top navbar-expand-lg border-bottom bg-body-tertiary">
 
-                    <div class="container-fluid">
-
-                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseWidthExample" aria-expanded="true" aria-controls="collapseWidthExample"
-                                style="margin-right: 10px; padding: 0px 5px 0px 5px;" id="sidebartoggle" onclick="changeclass()"> <i
-                                class="bi bi-arrows-expand-vertical"></i>
-                        </button>
-                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-                                style="margin-right: 10px; padding: 2px 6px 2px 6px;" id="sidebarshow">
-                            <i class="bi bi-arrow-bar-right"></i>
-                        </button>
-
-                        <!-- <a href="#" class="d-flex align-items-center navbar-brand">
-                      <img src="/hrmlogo2.png" alt="" height="40" ">
-
-                    </a> -->
+                        <div class="container-fluid">
+                            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseWidthExample" aria-expanded="true" aria-controls="collapseWidthExample"
+                                    style="margin-right: 10px; padding: 0px 5px 0px 5px;" id="sidebartoggle" onclick="changeclass()"> <i
+                                    class="bi bi-arrows-expand-vertical"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+                                    style="margin-right: 10px; padding: 2px 6px 2px 6px;" id="sidebarshow">
+                                <i class="bi bi-arrow-bar-right"></i>
+                            </button>
 
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-
-                                <!-- <li class="nav-item dropdown">
-                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                                    Dropdown
-                                  </a>
-                                  <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                      <hr class="dropdown-divider">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+<!--                                        <a class="nav-link active" aria-current="page" href="/">Home</a>-->
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                  </ul>
-                                </li> -->
-                                <!-- <li class="nav-item">
-                                  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                                </li> -->
-                            </ul>
-                            <!-- <form class="d-flex" role="search">
-                       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                       <button class="btn btn-outline-success" type="submit">Search</button>
-                     </form>
-                -->
-
-
-                            <div class="dropdown ps-2">
-                                <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-                                   data-bs-toggle="dropdown" aria-expanded="true">
-                                    <img src="/images/PIC2.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                                    <span class="d-print-block"><strong>Profile</strong></span>
-
-                                </a>
-                                <ul class="dropdown-menu text-small shadow">
-                                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                                </ul>
-                            </div>
-
-                            <!-- Cambair Tema -->
-                            <div class="dropdown-center" style="padding-left: 10px;">
-                                <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-                                        aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-                                    <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-                                        <use href="#circle-half"></use>
-                                    </svg>
-                                    <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-                                    <li>
-                                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                                                aria-pressed="false">
-                                            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                                                <use href="#sun-fill"></use>
-                                            </svg>
-                                            Light
-                                            <svg class="bi ms-auto d-none" width="1em" height="1em">
-                                                <use href="#check2"></use>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                                                aria-pressed="false">
-                                            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                                                <use href="#moon-stars-fill"></use>
-                                            </svg>
-                                            Dark
-                                            <svg class="bi ms-auto d-none" width="1em" height="1em">
-                                                <use href="#check2"></use>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
-                                                aria-pressed="true">
-                                            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                                                <use href="#circle-half"></use>
-                                            </svg>
-                                            Auto
-                                            <svg class="bi ms-auto d-none" width="1em" height="1em">
-                                                <use href="#check2"></use>
-                                            </svg>
-                                        </button>
+                                    <li class="nav-item">
+                                        <!--   some code-->
                                     </li>
                                 </ul>
+
+                                <div class="dropdown ps-2">
+                                    <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                                       data-bs-toggle="dropdown" aria-expanded="true">
+                                        <img src="/images/PIC2.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                                        <span class="d-print-block"><strong>Profile</strong></span>
+
+                                    </a>
+                                    <ul class="dropdown-menu text-small shadow">
+                                        <!--                                        <li><a class="dropdown-item" href="#">New project...</a></li>-->
+                                        <!--                                        <li><a class="dropdown-item" href="#">Settings</a></li>-->
+                                        <!--                                        <li><a class="dropdown-item" href="#">Profile</a></li>-->
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Cambair Tema -->
+                                <div class="dropdown-center" style="padding-left: 10px;">
+                                    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+                                            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                                        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+                                            <use href="#circle-half"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                                        <li>
+                                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                                                    aria-pressed="false">
+                                                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                                    <use href="#sun-fill"></use>
+                                                </svg>
+                                                Light
+                                                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                                    <use href="#check2"></use>
+                                                </svg>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                                                    aria-pressed="false">
+                                                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                                    <use href="#moon-stars-fill"></use>
+                                                </svg>
+                                                Dark
+                                                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                                    <use href="#check2"></use>
+                                                </svg>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
+                                                    aria-pressed="true">
+                                                <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                                    <use href="#circle-half"></use>
+                                                </svg>
+                                                Auto
+                                                <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                                    <use href="#check2"></use>
+                                                </svg>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Cambair Tema -->
+
                             </div>
-                            <!-- Cambair Tema -->
-
-
                         </div>
-                    </div>
+                    </nav>
+                    <!-- NavBar Fin -->
+                </header>
+            </div>
+
+            <div class=" d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+                 id="title">
+                <h1 class="h2">Admin Dashboard</h1>
+                <!-- <div class="btn-toolbar mb-2 mb-md-0">
+                  <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                  </div>
+                  <button type="button"
+                    class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+                    <i class="bi bi-calendar3"></i>
+                    This week
+                  </button>
+                </div> -->
+            </div>
+
+            <div class="row">
+                <nav aria-label="breadcrumb">
+<!--                    <ol class="breadcrumb">-->
+<!--                        <li class="breadcrumb-item"><a href="/">Home</a></li>-->
+<!--                    </ol>-->
                 </nav>
-                <!-- NavBar Fin -->
-            </header>
-        </div>
-
-        <div class=" d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-                id="title">
-            <h1 class="h2">Admin Dashboard</h1>
-            <!-- <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-              </div>
-              <button type="button"
-                class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-                <i class="bi bi-calendar3"></i>
-                This week
-              </button>
-            </div> -->
-        </div>
-
-        <div class="row">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Overview</li>
-                </ol>
-            </nav>
-            <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
+                <p>This is the homepage of a simple admin interface.</p>
 
 
-            <!-- FOUR CARDS -->
-            <div class="row my-4">
+                <!-- FOUR CARDS -->
                 <div class="row">
                     <div class="col-md-3">
                         <div class="card">
@@ -417,164 +380,11 @@
                 </div>
 
 
-<!--                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">-->
-<!--                    <div class="card">-->
-<!--                        <h5 class="card-header">Customers</h5>-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 class="card-title">345k</h5>-->
-<!--                            <p class="card-text">Feb 1 - Apr 1, United States</p>-->
-<!--                            <p class="card-text text-success">18.2% increase since last month</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">-->
-<!--                    <div class="card">-->
-<!--                        <h5 class="card-header">Revenue</h5>-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 class="card-title">$2.4k</h5>-->
-<!--                            <p class="card-text">Feb 1 - Apr 1, United States</p>-->
-<!--                            <p class="card-text text-success">4.6% increase since last month</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">-->
-<!--                    <div class="card">-->
-<!--                        <h5 class="card-header">Purchases</h5>-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 class="card-title">43</h5>-->
-<!--                            <p class="card-text">Feb 1 - Apr 1, United States</p>-->
-<!--                            <p class="card-text text-danger">2.6% decrease since last month</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">-->
-<!--                    <div class="card">-->
-<!--                        <h5 class="card-header">Traffic</h5>-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 class="card-title">64k</h5>-->
-<!--                            <p class="card-text">Feb 1 - Apr 1, United States</p>-->
-<!--                            <p class="card-text text-success">2.5% increase since last month</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--        -->
-
-
-
             </div>
-
-
-            <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-lg-0">
-                    <div class="card">
-                        <h5 class="card-header">Latest transactions</h5>
-                        <div class="card-body">
-                            table
-                            <!-- <div class="table-responsive">
-                              <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Order</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col"></th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">17371705</th>
-                                    <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                    <td>johndoe@gmail.com</td>
-                                    <td>€61.11</td>
-                                    <td>Aug 31 2020</td>
-                                    <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">17370540</th>
-                                    <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                    <td>jacob.monroe@company.com</td>
-                                    <td>$153.11</td>
-                                    <td>Aug 28 2020</td>
-                                    <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">17371705</th>
-                                    <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                    <td>johndoe@gmail.com</td>
-                                    <td>€61.11</td>
-                                    <td>Aug 31 2020</td>
-                                    <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">17370540</th>
-                                    <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                    <td>jacob.monroe@company.com</td>
-                                    <td>$153.11</td>
-                                    <td>Aug 28 2020</td>
-                                    <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">17371705</th>
-                                    <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                    <td>johndoe@gmail.com</td>
-                                    <td>€61.11</td>
-                                    <td>Aug 31 2020</td>
-                                    <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">17370540</th>
-                                    <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                    <td>jacob.monroe@company.com</td>
-                                    <td>$153.11</td>
-                                    <td>Aug 28 2020</td>
-                                    <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div> -->
-                            <!-- <a href="#" class="btn btn-block btn-light">View all</a> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-xl-4">
-                    <div class="card">
-                        <h5 class="card-header">Traffic last 6 months</h5>
-                        <div class="card-body">
-                            card
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-        <!-- FOOTER -->
-        <div class="row">
-            <footer class="pt-5 d-flex justify-content-between">
-                <span>HRMS-MU © 2024 <a href="#"></a></span>
-                <ul class="nav m-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#">Terms and conditions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#">Contact</a>
-                    </li>
-                </ul>
-            </footer>
-        </div>
-
     </div>
     </div>
+
 </main>
-
 
 <!-- sidebar for small screen -->
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasExample"
@@ -583,78 +393,65 @@
         <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5> -->
         <a href="#" class=" ms-5 d-flex align-items-center link-body-emphasis text-decoration-none">
             <img src="/images/hrmlogo2.png" alt=""  height="60" class="">
-
         </a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-        <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <svg class="bi pe-none me-2" width="40" height="32">
-            <use xlink:href="#bootstrap" />
-          </svg>
-          <span class="d-print-block">Sidebar</span>
-        </a> -->
 
+    <div class="offcanvas-body">
         <hr>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                    Home
+                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    Manage Employees
                 </button>
-                <div class="collapse" id="home-collapse">
+                <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
+                        <li><a href="/employees/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create Employees</a></li>
+                        <li><a href="/employees" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Manage Employees</a></li>
+
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                    Dashboard
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                    Manage Students
                 </button>
-                <div class="collapse" id="dashboard-collapse">
+                <div class="collapse" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                        <li><a href="/students/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Create Students</a></li>
+                        <li><a href="/students/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> List Students</a></li>
+
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                    Orders
+                    Manage Attendance
                 </button>
                 <div class="collapse" id="orders-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                        <li><a href="/employees/attendance/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Employee Attendance</a></li>
+                        <li><a href="/employees/attendance/manage" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Manage Employee Attendance</a></li>
+
                     </ul>
                 </div>
             </li>
-            <!-- <li class="border-top my-3"></li> -->
+
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                    Account
+                    Manage TimeTable
                 </button>
                 <div class="collapse" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                        <li><a href="/employee/select-department" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add TimeTable</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
-
     </div>
 </div>
 
@@ -711,15 +508,13 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="/js/dashboard.js"></script>
 
-
 <script>
     function changeclass() {
       $("#main").toggleClass('col-sm-10 col-sm-12');
     }
-
 </script>
-</body>
 
+</body>
 </html>
 
 

@@ -70,9 +70,6 @@
 
 
 
-
-
-
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en" data-bs-theme="auto">
@@ -82,7 +79,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
 
-    <title>Admin Dashboard</title>
+    <title>Employee Dashboard</title>
     <!-- Script para el tema oscuro -->
     <script src="/js/color-modes.js"></script>
     <!-- Bootstrao 5.3.2 -->
@@ -151,12 +148,9 @@
 <!--  Sidebar Menu-->
 
 <aside class="collapse show collapse-horizontal col-sm-2 p-3 border-end bg-body-tertiary" id="collapseWidthExample">
-
     <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none">
         <img src="/images/hrmlogo2.png" alt=""  height="40" class="">
-
     </a>
-
     <hr>
     <ul class="list-unstyled ps-0">
 
@@ -203,14 +197,12 @@
         <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                     data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                Account
+                Manage TimeTable
             </button>
             <div class="collapse" id="account-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                    <li><a href="/employee/select-department" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add TimeTable</a></li>
+
                 </ul>
             </div>
         </li>
@@ -230,7 +222,6 @@
                     <nav class="navbar sticky-top navbar-expand-lg border-bottom bg-body-tertiary">
 
                         <div class="container-fluid">
-
                             <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseWidthExample" aria-expanded="true" aria-controls="collapseWidthExample"
                                     style="margin-right: 10px; padding: 0px 5px 0px 5px;" id="sidebartoggle" onclick="changeclass()"> <i
@@ -243,7 +234,6 @@
                             </button>
 
 
-
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                                     aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -251,16 +241,13 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link active" aria-current="page" href="/">Home</a>-->
+<!--                                    </li>-->
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                  <!--   some code-->
                                     </li>
-                                    <li class="nav-item">
-
-                                    </li>
-
-
                                 </ul>
-
 
                                 <div class="dropdown ps-2">
                                     <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
@@ -270,13 +257,13 @@
 
                                     </a>
                                     <ul class="dropdown-menu text-small shadow">
-                                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+<!--                                        <li><a class="dropdown-item" href="#">New project...</a></li>-->
+<!--                                        <li><a class="dropdown-item" href="#">Settings</a></li>-->
+<!--                                        <li><a class="dropdown-item" href="#">Profile</a></li>-->
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
                                     </ul>
                                 </div>
 
@@ -329,7 +316,6 @@
                                     </ul>
                                 </div>
                                 <!-- Cambair Tema -->
-                                <a href="/logout" class="btn btn-secondary">Logout</a>
 
                             </div>
                         </div>
@@ -340,28 +326,13 @@
 
             <div class=" d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
                  id="title">
-                <h1 class="h2">Admin Dashboard</h1>
-                <!-- <div class="btn-toolbar mb-2 mb-md-0">
-                  <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                  </div>
-                  <button type="button"
-                    class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-                    <i class="bi bi-calendar3"></i>
-                    This week
-                  </button>
-                </div> -->
+                <h1 class="h2">Employee Dashboard</h1>
             </div>
 
             <div class="row">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
-
-                    </ol>
                 </nav>
-                <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
+                <p>This is the homepage of a simple Employee interface.</p>
 
 
                 <!-- FOUR CARDS -->
@@ -396,28 +367,18 @@
 
                     <div class="col-md-3">
                         <div class="card">
-                            <div class="card-header">Reports</div>
+                            <div class="card-header">TimeTable</div>
                             <div class="card-body">
                                 <p>Add TimeTable Department Wise</p>
                                 <a href="/employee/select-department" class="btn btn-primary">Add </a>
-
                             </div>
                         </div>
                     </div>
-
-
-
             </div>
-
-
-
         </div>
     </div>
     </div>
-
-
 </main>
-
 
 <!-- sidebar for small screen -->
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasExample"
@@ -426,78 +387,65 @@
         <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5> -->
         <a href="#" class=" ms-5 d-flex align-items-center link-body-emphasis text-decoration-none">
             <img src="/images/hrmlogo2.png" alt=""  height="60" class="">
-
         </a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-        <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <svg class="bi pe-none me-2" width="40" height="32">
-            <use xlink:href="#bootstrap" />
-          </svg>
-          <span class="d-print-block">Sidebar</span>
-        </a> -->
 
+    <div class="offcanvas-body">
         <hr>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                    Home
+                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    Manage Employees
                 </button>
-                <div class="collapse" id="home-collapse">
+                <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
+                        <li><a href="/employees/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create Employees</a></li>
+                        <li><a href="/employees" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Manage Employees</a></li>
+
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                    Dashboard
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                    Manage Students
                 </button>
-                <div class="collapse" id="dashboard-collapse">
+                <div class="collapse" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                        <li><a href="/students/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Create Students</a></li>
+                        <li><a href="/students/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> List Students</a></li>
+
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                    Orders
+                    Manage Attendance
                 </button>
                 <div class="collapse" id="orders-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                        <li><a href="/employees/attendance/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Employee Attendance</a></li>
+                        <li><a href="/employees/attendance/manage" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Manage Employee Attendance</a></li>
+
                     </ul>
                 </div>
             </li>
-            <!-- <li class="border-top my-3"></li> -->
+
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                    Account
+                    Manage TimeTable
                 </button>
                 <div class="collapse" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                        <li><a href="/employee/select-department" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add TimeTable</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
-
     </div>
 </div>
 
@@ -554,15 +502,13 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="/js/dashboard.js"></script>
 
-
 <script>
     function changeclass() {
       $("#main").toggleClass('col-sm-10 col-sm-12');
     }
-
 </script>
-</body>
 
+</body>
 </html>
 
 
