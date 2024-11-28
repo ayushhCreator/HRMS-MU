@@ -1,21 +1,284 @@
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Project</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student HRMS Dashboard</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+
+        /* Custom Theme Color */
+           .theme-bg {
+             background-color: #4CAF50 !important;
+           }
+           .theme-text {
+             color: #4CAF50 !important;
+           }
+           .btn-theme {
+             background-color: #4CAF50;
+             color: #fff;
+           }
+           .btn-theme:hover {
+             background-color: #45a049;
+             color: #fff;
+           }
+
+           .material-symbols-outlined {
+
+           font-size: 15px !important;
+
+           body {
+             background-color: #f9f9f9;
+             font-family: Arial, sans-serif;
+           }
+           h1 {
+             text-align: center;
+             margin: 20px 0;
+             color: #333;
+           }
+           table {
+             margin: 20px auto;
+             width: 95%;
+             border-collapse: collapse;
+             background: #ffffff;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           }
+           th, td {
+             border: 1px solid #ddd;
+             padding: 10px;
+             text-align: center;
+           }
+           th {
+             background-color: #4CAF50;
+             color: white;
+           }
+           tbody tr:nth-child(even) {
+             background-color: #f2f2f2;
+           }
+           tbody tr:hover {
+             background-color: #ddd;
+           }
+           .note {
+             text-align: center;
+             margin: 10px 0;
+             font-size: 0.9rem;
+             color: #555;
+           }
+    </style>
 </head>
 <body>
-<h1>Add a New Project</h1>
-<form action="/projects/add" method="post">
-    <label for="department">Department:</label>
-    <input type="text" id="department" name="department" required><br><br>
+<div class="d-flex flex-column flex-md-row">
+    <!-- Sidebar -->
+    <nav
+            class="w-25 p-3 bg-light sidebar collapse d-md-block"
+            id="sidebarMenu"
+    >
+        <div class="">
+            <!-- Logo -->
+            <div class="text-center mb-3">
+                <img src="/images/hrmslogo.png" alt="Logo" class="img-fluid logo" />
+            </div>
+            <!-- <h4 class="text-theme">University HRMS</h4> -->
+            <ul class="nav flex-column mt-3 align-items-left">
 
-    <label for="title">Project Title:</label>
-    <input type="text" id="title" name="title" required><br><br>
 
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" required></textarea><br><br>
+                <li class="nav-item mb-1">
+                    <button
+                            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#home-collapse"
+                            aria-expanded="false"
+                    >
+                        Projects
+                    </button>
+                    <div class="collapse" id="home-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4 small">
+                            <li><a href="/projects/add" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Add Project</a></li>
+                            <li><a href="/students/approvedf" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Check Approve Projects</a></li>
 
-    <button type="submit">Submit</button>
-</form>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item mb-1">
+                    <button
+                            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse1"
+                            aria-expanded="false"
+                    >
+                        Check TimeTable
+                    </button>
+                    <div class="collapse" id="collapse1">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4  small">
+
+                            <li><a href="/student/select-department" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> View TimeTable</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item mb-1">
+                    <button
+                            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse2"
+                            aria-expanded="false"
+                    >
+                        Check Results
+                    </button>
+                    <div class="collapse" id="collapse2">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4  small">
+
+                            <li>
+                                <a
+                                        href="#"
+                                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                                > View Result</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="w-100 main-content">
+        <div
+                class="ps-2 pe-2 pt-3 bg-light d-flex justify-content-between align-items-center flex-wrap"
+        >
+            <div>
+                <button class="btn btn-outline-theme mb-3">➕</button>
+            </div>
+
+            <div>
+                <button type="button" class="btn  btn-outline-theme mb-3" data-bs-toggle="modal" data-bs-target="#profileModal">
+                    🧑‍🏫 View Profile
+                </button>
+
+                <button class="btn btn-outline-theme mb-3">Logout</button>
+
+                <button
+                        class="btn btn-outline-theme d-md-none mb-3"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#sidebarMenu"
+                >
+                    ☰
+                </button>
+            </div>
+        </div>
+
+        <div class="ms-3 row mt-2 g-3 me-4">
+            <h1>Add a New Project</h1>
+            <form action="/projects/add" method="post">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" required><br><br>
+
+                <label for="title">Project Title:</label>
+                <input type="text" id="title" name="title" required><br><br>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea><br><br>
+
+                <button type="submit">Submit</button>
+            </form>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-item-center">
+                    <!-- Profile View -->
+                    <div id="profileView">
+                        <h6>Name:</h6>
+                        <p id="userName">John Doe</p>
+                        <h6>Email:</h6>
+                        <p id="userEmail">johndoe@example.com</p>
+                        <h6>Phone:</h6>
+                        <p id="userPhone">123-456-7890</p>
+                        <h6>Address:</h6>
+                        <p id="userAddress">123 Main Street, Cityville</p>
+                        <button class="btn btn-secondary mt-3" id="editProfileButton">Edit Profile</button>
+                    </div>
+
+                    <!-- Profile Edit Form -->
+                    <div id="profileEditForm" class="d-none">
+                        <form id="editProfile">
+                            <div class="mb-3">
+                                <label for="editName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editName" value="John Doe">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="editEmail" value="johndoe@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPhone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="editPhone" value="123-456-7890">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editAddress" class="form-label">Address</label>
+                                <textarea class="form-control" id="editAddress" rows="3">123 Main Street, Cityville</textarea>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" id="cancelEditButton">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>   <script>
+        const profileView = document.getElementById('profileView');
+        const profileEditForm = document.getElementById('profileEditForm');
+        const editProfileButton = document.getElementById('editProfileButton');
+        const cancelEditButton = document.getElementById('cancelEditButton');
+        const editProfileForm = document.getElementById('editProfile');
+
+        // Show edit form and hide profile view
+        editProfileButton.addEventListener('click', () => {
+            profileView.classList.add('d-none');
+            profileEditForm.classList.remove('d-none');
+        });
+
+        // Cancel editing and go back to profile view
+        cancelEditButton.addEventListener('click', () => {
+            profileEditForm.classList.add('d-none');
+            profileView.classList.remove('d-none');
+        });
+
+        // Save changes and update profile view
+        editProfileForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            document.getElementById('userName').textContent = document.getElementById('editName').value;
+            document.getElementById('userEmail').textContent = document.getElementById('editEmail').value;
+            document.getElementById('userPhone').textContent = document.getElementById('editPhone').value;
+            document.getElementById('userAddress').textContent = document.getElementById('editAddress').value;
+            profileEditForm.classList.add('d-none');
+            profileView.classList.remove('d-none');
+        });
+    </script>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+

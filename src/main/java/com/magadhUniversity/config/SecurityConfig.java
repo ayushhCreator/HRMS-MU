@@ -204,16 +204,16 @@ public class SecurityConfig {
                         .requestMatchers("/subjects/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT") // Access for students
                         .requestMatchers("/public/**").permitAll() // Allow public access to certain paths
+
                         // Project management routes
                         .requestMatchers("/projects/add", "/projects/approvedf").hasRole("STUDENT") // Students only
                         .requestMatchers("/projects/pending", "/projects/approved/").hasAnyRole("ADMIN", "EMPLOYEE") // Admin/Employee only
 
                         // Allow access to the student department selection page
-                        .requestMatchers("/student/select-department", "/student/timetable/view").hasAnyRole("STUDENT", "EMPLOYEE", "ADMIN")
+                        .requestMatchers("/students/timetable/**").hasAnyRole("STUDENT", "EMPLOYEE", "ADMIN")
                         // Allow access to employee timetable management page
-                        .requestMatchers("/employee/select-department", "/employee/timetable/manage", "/employee/timetable/add", "/employee/timetable/update", "/employee/timetable/delete",
-                                "/employee/timetable/mark","/employee/timetable/see"    )
-                        .hasRole("EMPLOYEE")
+                        .requestMatchers("/timetable", "/timetable/manage", "/timetable/add", "/timetable/update", "/timetable/delete",
+                                "/timetable/mark","/timetable/see" ).hasAnyRole("ADMIN","EMPLOYEE")
                         .requestMatchers("/mark_attendance").authenticated()
                         .anyRequest().authenticated()
                 )

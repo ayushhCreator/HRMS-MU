@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StudentDashBoardController
 {
 
-    @GetMapping("/timetable")
-    public String timetable() {
-        // Redirect to general profile management
-        return "timetable"; // timetable.html template
-    }
+//    @GetMapping("/timetable")
+//    public String timetable() {
+//        // Redirect to general profile management
+//        return "timetable"; // timetable.html template
+//    }
     @GetMapping("/examination")
     public String profile() {
         // Redirect to general profile management

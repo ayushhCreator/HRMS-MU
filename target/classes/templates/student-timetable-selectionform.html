@@ -1,14 +1,12 @@
-
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en" data-bs-theme="auto">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
 
-  <title>Employee Dashboard</title>
+  <title>Student Dashboard</title>
   <!-- Script para el tema oscuro -->
   <script src="/js/color-modes.js"></script>
   <!-- Bootstrao 5.3.2 -->
@@ -63,7 +61,7 @@
       }
     }
 
-      body {
+    body {
       background-color: #f9f9f9;
     }
     .form-container {
@@ -88,7 +86,6 @@
     .btn-custom:hover {
       background-color: #45a049;
     }
-
   </style>
 </head>
 
@@ -106,25 +103,23 @@
     <li class="mb-1">
       <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-        Manage Employees
+        Attendence
       </button>
       <div class="collapse" id="dashboard-collapse">
         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li><a href="/employees/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create Employees</a></li>
-          <li><a href="/employees" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Manage Employees</a></li>
-
+          <li><a href="@{/userAttendance}" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> View </a></li>
         </ul>
       </div>
     </li>
     <li class="mb-1">
       <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-        Manage Students
+        Manage Projects
       </button>
       <div class="collapse" id="home-collapse">
         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li><a href="/students/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Create Students</a></li>
-          <li><a href="/students/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> List Students</a></li>
+          <li><a href="/projects/add" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Add Project</a></li>
+          <li><a href="/students/approvedf" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Check Approve Projects</a></li>
 
         </ul>
       </div>
@@ -132,13 +127,11 @@
     <li class="mb-1">
       <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-        Manage Attendance
+        TimeTable
       </button>
       <div class="collapse" id="orders-collapse">
         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li><a href="/employees/attendance/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Employee Attendance</a></li>
-          <li><a href="/employees/attendance/manage" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Manage Employee Attendance</a></li>
-
+          <li><a href="/student/select-department" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> View TimeTable</a></li>
         </ul>
       </div>
     </li>
@@ -146,7 +139,7 @@
     <li class="mb-1">
       <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-        Manage TimeTable
+        View Marks
       </button>
       <div class="collapse" id="account-collapse">
         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -158,6 +151,9 @@
   </ul>
 
 </aside>
+
+
+
 <main class="col-sm-10 bg-body-tertiary" id="main">
   <div class="row" >
 
@@ -187,9 +183,9 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <!--                                    <li class="nav-item">-->
-                  <!--                                        <a class="nav-link active" aria-current="page" href="/">Home</a>-->
-                  <!--                                    </li>-->
+                  <li class="nav-item">
+                    <!--                                        <a class="nav-link active" aria-current="page" href="/">Home</a>-->
+                  </li>
                   <li class="nav-item">
                     <!--   some code-->
                   </li>
@@ -272,39 +268,40 @@
 
       <div class=" d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
            id="title">
-        <h1 class="h2">Employee Dashboard</h1>
+        <h1 class="h2">Student Dashboard</h1>
 
       </div>
 
+      <div class="row">
 
-      <div class=" col-12 ps-4 pe-4 ">
-          <div class="container">
-            <div class="form-container">
-              <div class="form-header">
-                <h1>Select Department</h1>
-              </div>
-              <form action="/employee/timetable/manage" method="get" class="p-4">
-                <div class="mb-3">
-                  <label for="department" class="form-label">Department:</label>
-                  <select id="department" name="department" class="form-select" required>
-                    <option value="" disabled selected>Select Department</option>
-                    <option value="Master of Business Administration">Master of Business Administration</option>
-                    <option value="Master of Computer Applications">Master of Computer Applications</option>
-                    <option value="CSE">Computer Science Engineering</option>
-                    <option value="ECE">Electronics and Communication</option>
-                    <option value="EEE">Electrical Engineering</option>
-                  </select>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-custom">Manage Timetable</button>
-                </div>
-              </form>
+        <div class="container">
+          <div class="form-container">
+            <div class="form-header">
+              <h1>Select Your Department</h1>
             </div>
+            <form action="/students/timetable/select" method="get" class="p-4">
+              <div class="mb-3">
+                <label for="department" class="form-label">Department:</label>
+                <select id="department" name="department" class="form-select" required>
+                  <option value="" disabled selected>Select Your Department</option>
+                  <option value="Master of Business Administration">Master of Business Administration</option>
+                  <option value="Master of Computer Applications">Master of Computer Applications</option>
+                  <option value="CSE">Computer Science Engineering</option>
+                  <option value="ECE">Electronics and Communication</option>
+                  <option value="EEE">Electrical Engineering</option>
+                </select>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-custom">View Timetable</button>
+              </div>
+            </form>
           </div>
         </div>
-        </div>
+
+      </div>
     </div>
   </div>
+
 </main>
 
 <!-- sidebar for small screen -->
@@ -321,28 +318,27 @@
   <div class="offcanvas-body">
     <hr>
     <ul class="list-unstyled ps-0">
+
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                 data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          Manage Employees
+          Attendence
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="/employees/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create Employees</a></li>
-            <li><a href="/employees" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Manage Employees</a></li>
-
+            <li><a href="@{/userAttendance}" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> View </a></li>
           </ul>
         </div>
       </li>
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                 data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-          Manage Students
+          Manage Projects
         </button>
         <div class="collapse" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="/students/create" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Create Students</a></li>
-            <li><a href="/students/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> List Students</a></li>
+            <li><a href="/projects/add" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Add Project</a></li>
+            <li><a href="/students/approvedf" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Check Approve Projects</a></li>
 
           </ul>
         </div>
@@ -350,13 +346,11 @@
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                 data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          Manage Attendance
+          TimeTable
         </button>
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="/employees/attendance/view" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Employee Attendance</a></li>
-            <li><a href="/employees/attendance/manage" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Manage Employee Attendance</a></li>
-
+            <li><a href="/students/timetable/select" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> View TimeTable</a></li>
           </ul>
         </div>
       </li>
@@ -364,11 +358,12 @@
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                 data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Manage TimeTable
+          View Marks
         </button>
         <div class="collapse" id="account-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="/employee/select-department" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add TimeTable</a></li>
+
           </ul>
         </div>
       </li>

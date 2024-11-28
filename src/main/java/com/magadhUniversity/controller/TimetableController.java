@@ -17,14 +17,14 @@ public class TimetableController {
     @Autowired
     private TimetableService timetableService;
 
-    // Render the department selection page
-    @GetMapping("/student/select-department")
+    // Render the department selection page for students
+    @GetMapping("/students/timetable/select")
     public String showDepartmentSelectionPage() {
-        return "student-department-selection";
+        return "student-timetable-selectionform";
     }
 
-    // Handle the department selection and display timetable
-    @GetMapping("/student/timetable")
+    // Handle the department selection and display timetable for students
+    @GetMapping("/students/timetable/view")
     public String viewTimetable(@RequestParam String department, Model model) {
         // Fetch timetable for the selected department
         List<Timetable> timetables = timetableService.getTimetableByDepartment(department);
@@ -36,24 +36,25 @@ public class TimetableController {
     }
 
 
-    // Render the department selection page for employees
-    @GetMapping("/employee/select-department")
+
+    // Render the department selection page
+    @GetMapping("/timetable")
     public String showDepartmentSelectionPageforEmp() {
-        return "employee-department-selection";
+        return "timetable-form";
     }
 
     // Display timetable management page for a department
-    @GetMapping("/employee/timetable/manage")
+    @GetMapping("/timetable/manage")
     public String manageTimetable(@RequestParam String department, Model model) {
         // Fetch the existing timetable for the department
         List<Timetable> timetables = timetableService.getTimetableByDepartment(department);
         model.addAttribute("department", department);
         model.addAttribute("timetables", timetables);
-        return "employee-timetable-management";
+        return "timetable-management";
     }
 
     // Handle adding a new timetable entry for the department
-    @PostMapping("/employee/timetable/add")
+    @PostMapping("/timetable/add")
     public String addTimetable(@RequestParam String department,
                                @RequestParam String day,
                                @RequestParam String sub1,
@@ -78,11 +79,11 @@ public class TimetableController {
 
         timetableService.saveTimetable(timetable);
 
-        return "redirect:/employee/timetable/manage?department=" + department;
+        return "redirect:/timetable/manage?department=" + department;
     }
 
     // Handle updating an existing timetable entry
-    @PostMapping("/employee/timetable/update")
+    @PostMapping("/timetable/update")
     public String updateTimetable(@RequestParam Long id,
                                   @RequestParam String day,
                                   @RequestParam String sub1,
@@ -104,15 +105,15 @@ public class TimetableController {
             timetable.setSub7(sub7);
             timetableService.saveTimetable(timetable);
         }
-        return "redirect:/employee/timetable/manage?department=" + timetable.getDepartment();
+        return "redirect:/timetable/manage?department=" + timetable.getDepartment();
 
     }
 
     // Handle deleting a timetable entry
-    @GetMapping("/employee/timetable/delete")
+    @GetMapping("/timetable/delete")
     public String deleteTimetable(@RequestParam Long id, @RequestParam String department) {
         timetableService.deleteTimetable(id);
-        return "redirect:/employee/timetable/manage?department=" + department;
+        return "redirect:/timetable/manage?department=" + department;
     }
 
 
