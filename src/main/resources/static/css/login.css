@@ -1,4 +1,4 @@
-/* General Reset */
+/* General Reset
 * {
     margin: 0;
     padding: 0;
@@ -42,123 +42,106 @@
     margin-bottom: 20px;
 }
 
-.logo {
-    width: 100px;
-    margin-bottom: 10px;
-}
 
-.login-header h1 {
-    font-size: 28px;
-    color: #fff; /* White for contrast */
-}
 
-.login-header p {
-    color: #e8ffe8;
-    font-size: 14px;
-}
-
-/* Form Styles */
-form {
-    width: 100%;
-    max-width: 300px;
+body {
+    background: linear-gradient(135deg, #667eea, #84fab0, #764ba2); /* Cool blue, light green, and purple gradient */
+    font-family: 'Ubuntu', sans-serif;
+    height: 100vh;
+    margin: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-label {
-    font-size: 14px;
-    color: #fff; /* White text for labels */
-    margin-bottom: 5px;
+.main {
+    background-color: #FFFFFF;
+    width: 400px;
+    padding: 20px;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.40); /* Darker shadow */
 }
 
-input {
-    padding: 10px;
-    border: 1px solid #87e370;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    background: #f9fff9; /* Subtle light green background */
-    color: #333;
-}
-
-input:focus {
-    outline: none;
-    border: 1px solid #4caf50;
-    box-shadow: 0 0 5px #4caf50;
-}
-
-.error-message {
-    color: #ffcccc;
-    font-size: 12px;
-    margin-bottom: 10px;
-}
-
-/* Button Styles */
-.btn {
-    background: linear-gradient(45deg, #3e8e41, #4caf50); /* Button gradient */
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    text-transform: uppercase;
-    transition: background 0.3s ease;
-}
-
-.btn:hover {
-    background: linear-gradient(45deg, #4caf50, #3e8e41); /* Reverse gradient on hover */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Link Styles */
-.link {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #e8ffe8; /* Lighter green for the link */
-    text-decoration: none;
+header {
     text-align: center;
+    padding: 10px 0;
 }
 
-.link:hover {
-    text-decoration: underline;
+.logo {
+    height: 100px;
+    width: auto;
 }
 
-/* Responsive Design: Media Queries */
-@media screen and (max-width: 768px) {
-    .login-container {
-        flex-direction: column; /* Stack sections vertically */
-    }
-
-    .login-left {
-        display: none; /* Hide the image section */
-    }
-
-    .login-right {
-        width: 100%; /* Use full width for the form */
-        padding: 20px;
-    }
-
-    form {
-        max-width: 90%; /* Reduce form width for small screens */
-    }
-
-    .btn {
-        font-size: 14px; /* Smaller button text size for small screens */
-        padding: 10px;
-    }
+.welcome {
+    display: block;
+    color: #4CAF50; /* Green color for welcome text */
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold; /* Make the welcome message bolder */
 }
 
-@media screen and (max-width: 480px) {
-    .login-right {
-        padding: 10px;
-    }
+.sign {
+    padding-top: 20px;
+    color: #4CAF50; /* Green color */
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+}
 
-    .login-header h1 {
-        font-size: 20px;
-    }
+.un, .pass {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 27px;
+    margin-left: 46px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
 
-    .btn {
-        font-size: 12px;
-        padding: 8px;
+.un:focus, .pass:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: #4CAF50; /* Green color */
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 35%;
+    margin-bottom: 20px; /* Added margin-bottom for spacing */
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.forgot {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #E1BEE7;
+    padding-top: 15px;
+}
+
+a {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #E1BEE7;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .main {
+        border-radius: 0px;
     }
 }

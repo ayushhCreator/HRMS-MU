@@ -1,36 +1,39 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>List of Student Marks</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University HRMS Dashboard</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* The Modal (background) */
+    /* Modal styles */
     .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
         left: 0;
         top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
     }
 
-    /* Modal Content */
     .modal-content {
         background-color: #fefefe;
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
+        width: 50%;
     }
 
-    /* The Close Button */
     .close {
         color: #aaaaaa;
         float: right;
@@ -45,152 +48,473 @@
     }
   </style>
 </head>
-<body>
-<header>
-  Welcome to Magadh University
-</header>
-<main>
-  <h1>Student Marks</h1>
-  <div th:if="${message}" class="alert alert-success" role="alert">
-    <span th:text="${message}"></span>
-  </div>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Student Name</th>
-      <th>Subject ID</th>
-      <th>Semester</th>
-      <th>Internal 1</th>
-      <th>Internal 2</th>
-      <th>Internal 3</th>
-      <th>Best Internal Marks</th>
-      <th>Final Exam Marks</th>
-      <th>Total Marks</th>
-      <th>Percentage</th>
-      <th>Division</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="studentMarks : ${studentMarksList}">
-      <td th:text="${studentMarks.markId}"></td>
-      <td th:text="${studentMarks.student?.name}"></td>
-      <td th:text="${studentMarks.subjectId}"></td>
-      <td th:text="${studentMarks.semester}"></td>
-      <td th:text="${studentMarks.internal1}"></td>
-      <td th:text="${studentMarks.internal2}"></td>
-      <td th:text="${studentMarks.internal3}"></td>
-      <td th:text="${studentMarks.bestInternalMarks}"></td>
-      <td th:text="${studentMarks.finalExamMarks}"></td>
-      <td th:text="${studentMarks.totalMarks}"></td>
-      <td th:text="${studentMarks.percentage}"></td>
-      <td th:text="${studentMarks.division}" th:classappend="'division-' + ${studentMarks.division}"></td>
+<body class="d-flex flex-column flex-md-row">
+<aside>
+  <!-- Sidebar -->
+  <nav
+          class=" h-100  p-3 bg-light  show collapse-horizontal  sidebar collapse d-md-block"
+          id="sidebarMenu"
+  >
+    <div class="">
+      <!-- Logo -->
+      <div class="text-center mb-3">
+        <img src="/images/hrmslogo.png" alt="Logo" class="img-fluid logo" />
+      </div>
+      <!-- <h4 class="text-theme">University HRMS</h4> -->
+      <ul class="nav flex-column mt-3 align-items-left">
+
+        <hr>
+        <li class="nav-item mb-1">
+          <button
+                  class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#home-collapse"
+                  aria-expanded="false"
+          >
+
+            Manage Employees
+          </button>
+          <div class="collapse" id="home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4 small">
+              <li>
+                <a
+                        href="/employees/create"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >Add Employees</a
+                >
+              </li>
+              <li>
+                <a
+                        href="/employees"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >View Employees</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!--                Students-->
+        <li class="nav-item mb-1">
+          <button
+                  class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse1"
+                  aria-expanded="false"
+          >
+            Manage Students
+          </button>
+          <div class="collapse" id="collapse1">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4  small">
+              <li>
+                <a
+                        href="/students/create"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >Add Students</a
+                >
+              </li>
+              <li>
+                <a
+                        href="/students"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >View Students</a
+                >
+              </li>
+
+              <li>
+                <a
+                        href="/student-marks"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >View Students Marks</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!--    Manage  Attendance-->
+        <li class="nav-item mb-1">
+          <button
+                  class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse2"
+                  aria-expanded="false"
+          >
+            Manage  Attendance
+          </button>
+          <div class="collapse" id="collapse2">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4  small">
+              <li>
+                <a
+                        href="/mark_attendance"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >Mark Employees Attendance</a
+                >
+              </li>
+              <!--                            <li>-->
+              <!--                                <a-->
+              <!--                                        href="/employees/attendance/view"-->
+              <!--                                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"-->
+              <!--                                >View All Attendance</a-->
+              <!--                                >-->
+              <!--                            </li>-->
+              <li>
+                <a
+                        href="/employees/attendance/manage"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >Manage Employees Attendance</a
+                >
+              </li>
+              <li>
+
+            </ul>
+          </div>
+        </li>
 
 
-      <td class="action-buttons">
-        <a th:href="@{/student-marks/update/{markId}(markId=${studentMarks.markId})}" class="btn btn-warning btn-sm btn-update">Update</a>
-        <form th:action="@{/student-marks/delete/{markId}(markId=${studentMarks.markId})}" method="post" style="display:inline;">
-          <button type="submit" class="btn btn-danger btn-sm btn-delete">Delete</button>
-        </form>
-        <button class="btn btn-info btn-sm"
-                th:onclick="'showPerformanceGraph(' + ${studentMarks.studentId} + ')'">View Performance</button>
+        <!--                Add Subjects-->
+        <li class="nav-item mb-1">
+          <button
+                  class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#subjectcollapse"
+                  aria-expanded="false"
+          >
+            Manage  Subjects
+          </button>
+          <div class="collapse" id="subjectcollapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4  small">
+              <li>
+                <a
+                        href="/subjects/create"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                > Add Subject </a
+                >
+              </li>
+              <li>
+                <a
+                        href="/subjects"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                >View All Subject</a
+                >
+              </li>
 
-      </td>
-    </tr>
-    </tbody>
-  </table>
+            </ul>
+            <!--                Add TimeTable-->
+            <li class="nav-item mb-1">
+              <button
+                      class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#Timetablecollapse"
+                      aria-expanded="false"
+              >
+                Manage  TimeTable
+              </button>
+              <div class="collapse" id="Timetablecollapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-4  small">
+                  <li>
+                    <a
+                            href="/timetable"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                    > Add and View TimeTable </a
+                    >
+                  </li>
 
-  <!-- Modal to show the graph -->
-  <div id="performanceModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Student Performance</h3>
-      <canvas id="performanceChart" width="400" height="200"></canvas>
+                </ul>
+              </div>
+            </li>
+      </ul>
+    </div>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<div class="w-100">
+  <div
+          class="ps-2 pe-2 pt-3 bg-light d-flex justify-content-between align-items-center flex-wrap"
+  >
+    <div>
+      <button
+              class="btn btn-outline-theme d-md-none mb-3"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#sidebarMenu"
+      >
+        ☰
+      </button>
+      <button class="btn btn-outline-theme mb-3">➕</button>
+    </div>
+
+    <div>
+<!--      <button type="button" class="btn  btn-outline-theme mb-3" data-bs-toggle="modal" data-bs-target="#profileModal">-->
+<!--        🧑‍🏫 View Profile-->
+<!--      </button>-->
+
+      <button class="btn btn-outline-theme mb-3">
+
+        <a href="/logout" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Logout  </a>
+
+      </button>
+
+
     </div>
   </div>
 
-  <script type="text/javascript" th:inline="javascript">
-    function showPerformanceGraph(studentId) {
-      // Make AJAX call to fetch the student performance data
-      fetch('/student-marks/performance/' + studentId)
-        .then(response => response.json())
-        .then(data => {
-          // Prepare data for the chart
-          var labels = [];
-          var internalMarks = [];
-          var finalExamMarks = [];
-          var totalMarks = [];
+  <div class="ms-3 row mt-2 g-3 me-2">
+    <div th:if="${message}" class="alert alert-success" role="alert">
+      <span th:text="${message}"></span>
+    </div>
+    <table class="table table-striped">
+      <thead>
+      <colgroup>
+        <col style="width: 3%;">
+        <col style="width: 8%;">
+        <col style="width: 3%;">
+        <col style="width: 3%;">
+        <col style="width: 4%;">
+        <col style="width: 4%;">
+        <col style="width: 4%;">
+        <col style="width: 4%;">
+        <col style="width: 5%;">
+        <col style="width: 6%;">
+        <col style="width: 2%;">
+        <col style="width: 3%;">
+        <col style="width: 2%;">
 
-          data.forEach(function(studentMarks) {
-            labels.push(studentMarks.student.name);
-            internalMarks.push(studentMarks.internal1);
-            finalExamMarks.push(studentMarks.finalExamMarks);
-            totalMarks.push(studentMarks.totalMarks);
-          });
+        <!--                  <col style="width: 1%;">-->
+      </colgroup>
+      <tr>
+        <th>ID</th>
+        <th>Student Name</th>
+        <th>Subject ID</th>
+        <th>Semester</th>
+        <th>Internal 1</th>
+        <th>Internal 2</th>
+        <th>Internal 3</th>
+        <th>Best Internal Marks</th>
+        <th>Final Exam Marks</th>
+        <th>Total Marks</th>
+        <th>Percentage</th>
+        <th>Division</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="studentMarks : ${studentMarksList}">
+        <td th:text="${studentMarks.markId}"></td>
+        <td th:text="${studentMarks.student?.name}"></td>
+        <td th:text="${studentMarks.subjectId}"></td>
+        <td th:text="${studentMarks.semester}"></td>
+        <td th:text="${studentMarks.internal1}"></td>
+        <td th:text="${studentMarks.internal2}"></td>
+        <td th:text="${studentMarks.internal3}"></td>
+        <td th:text="${studentMarks.bestInternalMarks}"></td>
+        <td th:text="${studentMarks.finalExamMarks}"></td>
+        <td th:text="${studentMarks.totalMarks}"></td>
+        <td th:text="${studentMarks.percentage}"></td>
+        <td th:text="${studentMarks.division}" th:classappend="'division-' + ${studentMarks.division}"></td>
+        <td class="action-buttons">
+          <a th:href="@{/student-marks/update/{markId}(markId=${studentMarks.markId})}" class="btn btn-warning btn-sm btn-update">Update</a>
+          <form th:action="@{/student-marks/delete/{markId}(markId=${studentMarks.markId})}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm btn-delete">Delete</button>
+          </form>
+          <button class="btn btn-info btn-sm" th:onclick="'showPerformanceGraph(' + ${studentMarks.studentId} + ')'">View Performance</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
-          // Generate the chart
-          var ctx = document.getElementById('performanceChart').getContext('2d');
-          var performanceChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: labels,
-              datasets: [
-                {
-                  label: 'Internal Marks',
-                  data: internalMarks,
-                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                  borderColor: 'rgba(75, 192, 192, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label: 'Final Exam Marks',
-                  data: finalExamMarks,
-                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                  borderColor: 'rgba(255, 99, 132, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label: 'Total Marks',
-                  data: totalMarks,
-                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                  borderColor: 'rgba(54, 162, 235, 1)',
-                  borderWidth: 1
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
+    <!-- Modal to display the performance chart -->
+    <div id="performanceModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Student Performance</h3>
+        <canvas id="performanceChart" width="400" height="200"></canvas>
+      </div>
+    </div>
 
-          // Open the modal to show the graph
-          document.getElementById("performanceModal").style.display = "block";
-        })
-        .catch(error => console.error('Error fetching performance data:', error));
-    }
+  </div>
 
-    // Close the modal when the user clicks the close button
-    document.querySelector(".close").addEventListener("click", function() {
-      document.getElementById("performanceModal").style.display = "none";
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex align-item-center">
+        <!-- Profile View -->
+        <div id="profileView">
+          <h6>Name:</h6>
+          <p id="userName">John Doe</p>
+          <h6>Email:</h6>
+          <p id="userEmail">johndoe@example.com</p>
+          <h6>Phone:</h6>
+          <p id="userPhone">123-456-7890</p>
+          <h6>Address:</h6>
+          <p id="userAddress">123 Main Street, Cityville</p>
+          <button class="btn btn-secondary mt-3" id="editProfileButton">Edit Profile</button>
+        </div>
+
+        <!-- Profile Edit Form -->
+        <div id="profileEditForm" class="d-none">
+          <form id="editProfile">
+            <div class="mb-3">
+              <label for="editName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="editName" value="John Doe">
+            </div>
+            <div class="mb-3">
+              <label for="editEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="editEmail" value="johndoe@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="editPhone" class="form-label">Phone</label>
+              <input type="tel" class="form-control" id="editPhone" value="123-456-7890">
+            </div>
+            <div class="mb-3">
+              <label for="editAddress" class="form-label">Address</label>
+              <textarea class="form-control" id="editAddress" rows="3">123 Main Street, Cityville</textarea>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" id="cancelEditButton">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <script>
+    const profileView = document.getElementById('profileView');
+    const profileEditForm = document.getElementById('profileEditForm');
+    const editProfileButton = document.getElementById('editProfileButton');
+    const cancelEditButton = document.getElementById('cancelEditButton');
+    const editProfileForm = document.getElementById('editProfile');
+
+    // Show edit form and hide profile view
+    editProfileButton.addEventListener('click', () => {
+        profileView.classList.add('d-none');
+        profileEditForm.classList.remove('d-none');
     });
 
-    // Close the modal if the user clicks anywhere outside of the modal
-    window.onclick = function(event) {
-      var modal = document.getElementById("performanceModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
+    // Cancel editing and go back to profile view
+    cancelEditButton.addEventListener('click', () => {
+        profileEditForm.classList.add('d-none');
+        profileView.classList.remove('d-none');
+    });
+
+    // Save changes and update profile view
+    editProfileForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.getElementById('userName').textContent = document.getElementById('editName').value;
+        document.getElementById('userEmail').textContent = document.getElementById('editEmail').value;
+        document.getElementById('userPhone').textContent = document.getElementById('editPhone').value;
+        document.getElementById('userAddress').textContent = document.getElementById('editAddress').value;
+        profileEditForm.classList.add('d-none');
+        profileView.classList.remove('d-none');
+    });
+  </script>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript">
+  let chartInstance; // Store the chart instance globally
+
+  // Fetch and display performance data
+  function showPerformanceGraph(studentId) {
+    fetch('/student-marks/performance/' + studentId)
+      .then(response => response.json())
+      .then(data => {
+        const labels = [];
+        const obtainedInternalMarks = [];
+        const totalInternalMarks = [];
+        const obtainedFinalExamMarks = [];
+        const totalFinalExamMarks = [];
+        const obtainedTotalMarks = [];
+        const totalPossibleMarks = [];
+
+        data.forEach(studentMarks => {
+           // Check if student and name exist; otherwise, use a default value
+         const studentName = studentMarks.student && studentMarks.student.name ? studentMarks.student.name : " Student Marks";
+          labels.push(studentName);
+          obtainedInternalMarks.push(studentMarks.bestInternalMarks || 0);
+          totalInternalMarks.push(30); // Assuming total internal marks is 30
+          obtainedFinalExamMarks.push(studentMarks.finalExamMarks || 0);
+          totalFinalExamMarks.push(100); // Assuming total final exam marks is 100
+          obtainedTotalMarks.push(studentMarks.totalMarks || 0);
+          totalPossibleMarks.push(125); // Updated total possible marks
+        });
+
+        // Destroy the existing chart if it exists
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        chartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              { label: 'Best Internal Marks', data: obtainedInternalMarks, backgroundColor: 'rgba(75, 192, 192, 0.6)' },
+              { label: 'Total Internal Marks', data: totalInternalMarks, backgroundColor: 'rgba(75, 192, 192, 0.2)' },
+              { label: 'Obtained Final Exam Marks', data: obtainedFinalExamMarks, backgroundColor: 'rgba(255, 99, 132, 0.6)' },
+              { label: 'Total Final Exam Marks', data: totalFinalExamMarks, backgroundColor: 'rgba(255, 99, 132, 0.2)' },
+              { label: 'Obtained Total Marks', data: obtainedTotalMarks, backgroundColor: 'rgba(54, 162, 235, 0.6)' },
+              { label: 'Total Possible Marks', data: totalPossibleMarks, backgroundColor: 'rgba(54, 162, 235, 0.2)' }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: { beginAtZero: true },
+              x: { title: { display: true, text: 'Subjects' } }
+            }
+          }
+        });
+
+        document.getElementById("performanceModal").style.display = "block";
+      })
+      .catch(error => console.error('Error fetching performance data:', error));
+  }
+
+  // Close modal
+  document.querySelector(".close").addEventListener("click", function() {
+    document.getElementById("performanceModal").style.display = "none";
+
+    // Destroy the chart instance when the modal is closed
+    if (chartInstance) {
+      chartInstance.destroy();
+      chartInstance = null;
+    }
+  });
+
+  // Close modal on outside click
+  window.onclick = function(event) {
+    const modal = document.getElementById("performanceModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+
+      // Destroy the chart instance when the modal is closed
+      if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
       }
     }
-  </script>
-</main>
+  };
+</script>
+
 </body>
 </html>
-
-
-

@@ -1,5 +1,6 @@
 package com.magadhUniversity.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.Arrays;
 
@@ -12,6 +13,7 @@ public class StudentMarks {
     private Long markId;
 
     @ManyToOne
+    @JsonBackReference // Prevent recursion
     @JoinColumn(name = "student_id", nullable = false, insertable = false, updatable = false)
     private Student student;
 

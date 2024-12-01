@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -215,7 +216,12 @@
                 🧑‍🏫 View Profile
             </button>
 
-            <button class="btn btn-outline-theme mb-3">Logout</button>
+
+            <button class="btn btn-outline-theme mb-3">
+
+                <a href="/logout" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Logout  </a>
+
+            </button>
 
 
         </div>
