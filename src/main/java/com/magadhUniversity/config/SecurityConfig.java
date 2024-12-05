@@ -171,6 +171,7 @@
 
 package com.magadhUniversity.config;
 
+import com.magadhUniversity.model.Employee;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -210,7 +211,7 @@ public class SecurityConfig {
                         .requestMatchers("/projects/pending", "/projects/approved/").hasAnyRole("ADMIN", "EMPLOYEE") // Admin/Employee only
 
                         // Allow access to the student department selection page
-                        .requestMatchers("/students/timetable/**").hasAnyRole("STUDENT", "EMPLOYEE", "ADMIN")
+                        .requestMatchers("/student/timetable/**").hasAnyRole("STUDENT","ADMIN","EMPLOYEE")
                         // Allow access to employee timetable management page
                         .requestMatchers("/timetable", "/timetable/manage", "/timetable/add", "/timetable/update", "/timetable/delete",
                                 "/timetable/mark","/timetable/see" ).hasAnyRole("ADMIN","EMPLOYEE")

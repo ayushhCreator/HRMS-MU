@@ -19,6 +19,11 @@ public class Timetable {
 //    private String endTime;
     private String sub1;
     private String sub2;
+    private String sub3;
+    private String sub4;
+    private String sub5;
+    private String sub6;
+    private String sub7;
 
     public String getSub1() {
         return sub1;
@@ -76,11 +81,6 @@ public class Timetable {
         this.sub7 = sub7;
     }
 
-    private String sub3;
-    private String sub4;
-    private String sub5;
-    private String sub6;
-    private String sub7;
 
     public Long getId() {
         return id;

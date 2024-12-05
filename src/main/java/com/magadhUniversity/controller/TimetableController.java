@@ -13,28 +13,24 @@ import java.util.List;
 
 @Controller
 public class TimetableController {
-
     @Autowired
     private TimetableService timetableService;
 
     // Render the department selection page for students
-    @GetMapping("/students/timetable/select")
-    public String showDepartmentSelectionPage() {
+    @GetMapping("/student/timetable/select")
+    public String showDepartmentPage() {
         return "student-timetable-selectionform";
     }
-
     // Handle the department selection and display timetable for students
-    @GetMapping("/students/timetable/view")
+    @GetMapping("/student/timetable/view")
     public String viewTimetable(@RequestParam String department, Model model) {
         // Fetch timetable for the selected department
         List<Timetable> timetables = timetableService.getTimetableByDepartment(department);
-
         model.addAttribute("department", department);
         model.addAttribute("timetables", timetables);
 
-        return "student-timetable-view";  // The page where the timetable is displayed
+        return "student-timetable-view"; // The page where the timetable is displayed
     }
-
 
 
     // Render the department selection page
