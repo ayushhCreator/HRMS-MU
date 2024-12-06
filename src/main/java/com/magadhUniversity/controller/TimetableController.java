@@ -1,5 +1,4 @@
 package com.magadhUniversity.controller;
-
 import com.magadhUniversity.model.Timetable;
 import com.magadhUniversity.service.TimetableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +15,12 @@ public class TimetableController {
     @Autowired
     private TimetableService timetableService;
 
-    // Render the department selection page for students
+
     @GetMapping("/student/timetable/select")
     public String showDepartmentPage() {
         return "student-timetable-selectionform";
     }
-    // Handle the department selection and display timetable for students
+
     @GetMapping("/student/timetable/view")
     public String viewTimetable(@RequestParam String department, Model model) {
         // Fetch timetable for the selected department
@@ -33,13 +32,11 @@ public class TimetableController {
     }
 
 
-    // Render the department selection page
     @GetMapping("/timetable")
     public String showDepartmentSelectionPageforEmp() {
         return "timetable-form";
     }
 
-    // Display timetable management page for a department
     @GetMapping("/timetable/manage")
     public String manageTimetable(@RequestParam String department, Model model) {
         // Fetch the existing timetable for the department
@@ -49,7 +46,6 @@ public class TimetableController {
         return "timetable-management";
     }
 
-    // Handle adding a new timetable entry for the department
     @PostMapping("/timetable/add")
     public String addTimetable(@RequestParam String department,
                                @RequestParam String day,
@@ -61,7 +57,7 @@ public class TimetableController {
                                @RequestParam String sub6,
                                @RequestParam String sub7
     ) {
-        // Create new timetable entry
+
         Timetable timetable = new Timetable();
         timetable.setDepartment(department);
         timetable.setDay(day);
@@ -78,7 +74,6 @@ public class TimetableController {
         return "redirect:/timetable/manage?department=" + department;
     }
 
-    // Handle updating an existing timetable entry
     @PostMapping("/timetable/update")
     public String updateTimetable(@RequestParam Long id,
                                   @RequestParam String day,
@@ -105,10 +100,10 @@ public class TimetableController {
 
     }
 
-    // Handle deleting a timetable entry
     @GetMapping("/timetable/delete")
     public String deleteTimetable(@RequestParam Long id, @RequestParam String department) {
         timetableService.deleteTimetable(id);
+
         return "redirect:/timetable/manage?department=" + department;
     }
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>University HRMS Dashboard</title>
+  <title> HRMS Admin Dashboard</title>
   <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -272,7 +272,12 @@
           🧑‍🏫 View Profile
         </button>
 
-        <button class="btn btn-outline-theme mb-3">Logout</button>
+
+        <button class="btn btn-outline-theme mb-3">
+
+          <a href="/logout" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Logout  </a>
+
+        </button>
 
         <button
                 class="btn btn-outline-theme d-md-none mb-3"
@@ -287,6 +292,16 @@
 
     <div class="ms-3 row mt-2 g-3 me-2">
 
+      <div class="col-12 ">
+        <div class="welcome-card  justify-content-center">
+          <h1>Welcome to the HRMS Dashboard</h1>
+          <p>
+            Streamline your university operations with an easy-to-use platform for managing employees,
+            students, and academic schedules efficiently.
+          </p>
+          <!--                        <a href="#features" class="btn btn-custom">Get Started</a>-->
+        </div>
+      </div>
       <div class=" col-12 ps-4 pe-4 ">
         <div class="text-center mb-4">
           <h1 class="theme-text">Timetable Management</h1>
@@ -379,10 +394,11 @@
                   <col style="width: 9%;">
                   <col style="width: 9%;">
                   <col style="width: 9%;">
-                  <col style="width: 9%;">
-                  <col style="width: 9%;">
-                  <col style="width: 9%;">
-                  <col style="width: 9%;">
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
 <!--                  <col style="width: 1%;">-->
                 </colgroup>
                 <thead class="table-light">
@@ -397,8 +413,10 @@
                   <th>2:00 pm - 3:00 pm</th>
                   <th>3:00 pm - 4:00 pm</th>
                   <th>4:00 pm - 5:00 pm</th>
-                  <th>Action Buttons</th>
-<!--                  <th>  <span class="material-symbols-outlined  btn btn-theme btn-sm" style="vertical-align: middle;">update</span>-->
+                  <th>Update </th>
+                  <th>Delete </th>
+
+                  <!--                  <th>  <span class="material-symbols-outlined  btn btn-theme btn-sm" style="vertical-align: middle;">update</span>-->
 <!--                  </th>-->
 <!--                  <th>  <span class="material-symbols-outlined btn btn-danger btn-sm" style="vertical-align: middle;">delete</span></th>-->
 <!--                </tr>-->
@@ -419,19 +437,20 @@
                     <td><input type="text" name="sub7" class="form-control" th:value="${timetable.sub7}" required></td>
                     <td>
                       <button type="submit" class="btn btn-theme btn-sm" title="Update">
-                        <span class="material-symbols-outlined" style="vertical-align: middle;">update</span>
+                        <span class="material-symbols-outlined" style="vertical-align: middle;">Update</span>
                       </button>
-
-                      <form action="/timetable/delete" method="get" class="d-inline">
-                        <input type="hidden" name="id" th:value="${timetable.id}">
-                        <input type="hidden" name="department" th:value="${department}">
-                        <button type="submit" class="btn btn-danger btn-sm" title="Delete">
-                          <span class="material-symbols-outlined" style="vertical-align: middle;">delete</span>
-                        </button>
-                      </form>
                     </td>
                   </form>
+                  <td>
 
+                    <form action="/timetable/delete" method="get" class="d-inline">
+                      <input type="hidden" name="id" th:value="${timetable.id}">
+                      <input type="hidden" name="department" th:value="${department}">
+                      <button type="submit" class="btn btn-danger btn-sm" title="Delete">
+                        <span class="material-symbols-outlined" style="vertical-align: middle;">Delete</span>
+                      </button>
+                    </form>
+                  </td>
                 </tr>
                 </tbody>
               </table>

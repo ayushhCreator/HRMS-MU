@@ -1,5 +1,4 @@
 package com.magadhUniversity.service;
-
 import com.magadhUniversity.model.Timetable;
 import com.magadhUniversity.repository.TimetableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,9 @@ public class TimetableService {
         return timetableRepository.findById(id).orElse(null);
     }
 
-    // Delete a timetable entry by ID
     public void deleteTimetable(Long id) {
+        System.out.println("Attempting to delete timetable with ID: " + id);
         timetableRepository.deleteById(id);
+        System.out.println("Deleted timetable with ID: " + id);
     }
 }

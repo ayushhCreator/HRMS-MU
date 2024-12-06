@@ -1,7 +1,5 @@
 package com.magadhUniversity.model;
-
 import jakarta.persistence.*;
-import java.time.DayOfWeek;
 
 @Entity
 @Table(name = "timetable")
@@ -13,10 +11,6 @@ public class Timetable {
 
     private String department;
     private String day;  // The day of the week (Monday to Friday)
-//    private String subject;
-//    private String teacher;
-//    private String startTime;
-//    private String endTime;
     private String sub1;
     private String sub2;
     private String sub3;
@@ -105,6 +99,5 @@ public class Timetable {
     public void setDay(String day) {
         this.day = day;
     }
-
 
 }
